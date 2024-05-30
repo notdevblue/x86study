@@ -6,7 +6,7 @@
 ; ## GPR 16비트 명명 규칙
 
 ; 8개의 GPR은 아레와 같음
-; 1. Accumulator(누산기) Register   (AX). 산술 연산에 사용됨. 상수를 합쳐서 누산기에 넣는 연산코드는 1바이트임.
+; 1. Accumulator(누산기) register   (AX). 산술 연산에 사용됨. 상수를 합쳐서 누산기에 넣는 연산코드는 1바이트임.
 ; 2. Base register                  (BX). 데이터를 향한 포인터로 사용됨. (Segmented mode 일 때는 Segment register DS 에 위치함)
 ; 3. Couter register                (CX). 명령을 이동/회전, 반복할때 사용됨.
 ; 4. Stack Pointer register         (SP). 스택 맨 위를 향한 포인터.
@@ -49,7 +49,7 @@
 ; 1. Stack Segment  (SS). 스택을 향한 포인터                    (Stack 의 S)
 ; 2. Code Segment   (CS). 코드를 향한 포인터                    (Code 의 C)
 ; 3. Data Segment   (DS). 데이터를 향한 포인터                  (Data 의 D)
-; 4. Extra Segment  (EX). 추가 데이터를 향한 포인터             (Extra 의 E, D 다음이 E 이기도 함)
+; 4. Extra Segment  (ES). 추가 데이터를 향한 포인터             (Extra 의 E, D 다음이 E 이기도 함)
 ; 5. F Segment      (FS). 추가 추가 데이터를 향한 포인터        (E 다음이 F)
 ; 6. G Segment      (GS). 추가 추가 추가 데이터를 향한 포인터   (F 다음이 G)
 
@@ -61,4 +61,28 @@
 ; EFLAGS 는 32비트로 이루어진 프로세서가 실행한 작업의 결과를 boolean 으로 기록하는 레지스터임.
 ; 비트들은 아레와 같음.
 
-; 표 그려야 함.
+; | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 |  20 |  19 | 18 | 17 | 16 | 15 | 14 | 13  12 | 11 | 10 | 09 | 08 | 07 | 06 | 05 | 04 | 03 | 02 | 01 | 00 |
+; |----|----|----|----|----|----|----|----|----|----|----|-----|-----|----|----|----|----|----|--------|----|----|----|----|----|----|----|----|----|----|----|----|
+; |  0 |  0 |  0 |  0 |  0 |  0 |  0 |  0 |  0 |  0 | ID | VIP | VIF | AC | VM | RF |  0 | NT |  IOPL  | OF | DF | IF | TF | SF | ZF |  0 | AF |  0 | PF |  1 | CF |
+
+; 0과 1로 이름된 비트는 예약된 비트이며, 변경되면 안됨
+
+; 플래그가 사용되는 방식
+; 00        CF      Carry Flag                              마지막 산술 연산이 레지스터 사이즈를 넘어서서 비트를 Carry(가져왔)(더하기)거나 borrow(빌려왔)(빼기)을때 설정됨. 하나의 레지스터가 보관하기에는 값이 너무 큰 Add-with-cary 또는 Subtract-with-borrow 연산이 이루어졌을 때 채크됨
+; 02        PF      Parity Flag                             최하위 바이트에 설정된 바이트의 수가 2의 배수일 시 설정됨.
+; 04        AF      Adjust Flag                             Binary-coded decimal(이진화 십진법) 산술 연산에서 Carry 나 Borrow 가 일어났을 때 설정됨.
+; 06        ZF      Zero Flag                               연산의 결과가 0 일때 설정됨.
+; 07        SF      Sign Flag                               연산의 결과가 음수일때 설정됨.
+; 08        TF      Trap Flag                               스탭 바이 스탭 디버깅일 때 설정됨.
+; 09        IF      Intrruption Flag                        인터럽트가 활성화되었을 때 설정됨.
+; 10        DF      Direction Flag                          Stream 방향. 설정되었을 시, 문자열 연산에서 포인터는 증가하지 않고 줄어듬. 메모리를 거꾸로 읽게 됨.
+; 11        OF      Overflow Flag                           부호 있는 산술 연산의 결과가 레지스터가 담기에 너무 큰 경우 설정됨.
+; 12 ~ 13   IOPL    I/O Privilege Level Field (2 bits)      현재 프로세스의 I/O 권한 레벨.
+; 14        NT      Nested Task Flag                        인터럽트의 체이닝을 컨트롤 함. 현제 프로세스가 다음 프로세서와 연결되어있을 때 설정됨.
+; 16        RF      Resume Flag                             디버그 예외의 응답.
+; 17        VM      Virtual-8086 Mode                       8086 호환 모드일때 설정됨.
+; 18        AC      Alignment Check                         메모리 레퍼런스에 대한 정렬 검사가 끝났을 시 설정됨.
+; 19        VIF     Virtual Interrupt Flag                  IF 의 가상 이미지.
+; 20        VIP     Virutal Interrupt Pending Flag          인터럽트가 보류 중일때 설정됨.
+; 21        ID      Identification Flag                     CPUID 지침이 지원될 때 설정됨.
+
