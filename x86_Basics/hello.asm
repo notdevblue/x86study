@@ -1,4 +1,5 @@
 ; https://wiki.kldp.org/HOWTO/html/Assembly-HOWTO/hello.html
+; https://tldp.org/HOWTO/Assembly-HOWTO/hello.html
 section .data
 
 msg db "Hello World!", 0xa
