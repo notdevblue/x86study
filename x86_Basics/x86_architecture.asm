@@ -124,3 +124,44 @@
 
 ; 0001 은 1을 나타냄
 ; 1111 은 -1을 나타냄
+
+; ## Addressing modes
+
+; x86 어셈블리어는 주소 지정 모드가 지침에서 메모리 피연산자가 어떻게 지정되는지 결정함.
+; 주소 지정 모드는 프로그래머가 메모리의 데이터를 접근하거나, 피연산자에 연산을 하는 행위를 효율적으로 할 수 있게 함.
+; x86 아키택처는 여러 주소 지정 모드를 지원함. 각각 메모리나 레지스터를 다른 방식으로 참조함.
+; 아레는 흔히 사용되는 x86 주소 지정 모드의 예시임.
+
+; ### Register Addressing
+;   (피연산자 주소 R 이 주소 필드에 있음)
+
+mov ax, bx ; bx 에 있는 요소를 ax에 옮김
+
+; ### Immediate
+;   (실제 값이 필드에 있음)
+
+mov ax, 1 ; 1 을 ax 에 옮김
+; 또는
+mov ax, 010Ch ; 0x010C 를 ax 에 옮김
+
+; ### Direct Mmemory Addressing
+;   (피연산자 주소가 주소 필드에 있음)
+
+.data
+my_var dw 0ABCDh ; my_var = 0xABCD
+.code
+mov ax, [my_var] ; my_var 요소를 ax에 옮김 (ax=0xABCD)
+
+; ### Direct Offset Addressing
+;   (산수 연산을 통해 주소를 변경함)
+
+byte_table db 12, 15, 16, 22 ; 바이트들
+mov al, [byte_table + 2]
+mov al, byte_table[2] ; 위의 지침과 같음
+
+; ### Register Indirect
+;   (피연산자의 주소를 가진 레지스터로 가르킴)
+
+mov ax, [di]
+
+; Indirect addressing 에 사용되는 레지스터는 BX, BP, SI, DI 임.
