@@ -11,12 +11,12 @@ section .text
 
 _start:
 
-mov edx, len
-mov ecx, msg,
-mov ebx, 1
-mov eax, 4
-int 0x80
+mov eax, 4      ; write
+mov ebx, 1      ;   stdout
+mov ecx, msg,   ;   "Hello World!"
+mov edx, len    ;   msg.len
+int 0x80        
 
-mov ebx, 0
-mov eax, 1
+mov ebx, 0      ; code 0
+mov eax, 1      ; return
 int 0x80
