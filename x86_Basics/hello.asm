@@ -1,5 +1,6 @@
 ; https://wiki.kldp.org/HOWTO/html/Assembly-HOWTO/hello.html
 ; https://tldp.org/HOWTO/Assembly-HOWTO/hello.html
+; https://github.com/0xAX/asm?tab=readme-ov-file
 section .data
 
 msg db "Hello World!", 0xa
