@@ -43,4 +43,8 @@ CS:IP (Code Segment: Instruction Pointer) 는 다음에 실행 명령이 있는 
 
 ## Protected Mode (80286+)
 
+보기에는 좀 그렇지만, 후기에 나온 CPU들이 사용하는 보호 주소 체계임. 80286은 protected mode가 있음. 24개의 주소 라인이 다 사용 가능하고, 이는 16MiB의 메모리 만큼 주소 지정이 가능함. 보호 모드에선, CS, DS, ES, SS 레지스터들은 세그먼트가 아닌 selectors 임, 프로그램이 사용중이었던 물리 메모리 블럭을 가리킴. 이 모드에서 CS:IP = 0010:2400 포인터 값은 아레와 같이 사용됨.
+
+
+
 ## 32-Bit Addressing
