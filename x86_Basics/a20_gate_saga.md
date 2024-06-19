@@ -1,4 +1,4 @@
-# The A20 Gate Saga
+# [The A20 Gate Saga](https://en.wikibooks.org/wiki/X86_Assembly/16,_32,_and_64_Bits#The_A20_Gate_Saga)
 
 예전에 말한 것 처럼, 8086 프로세서는 20개의 주소 라인이 있음. (A0에서 A19) 그래서 총 1MiB (또는 2^20)만큼의 메모리 공간을 주소 지정 가능했음. 하지만 그때는 오직 16-bit 의 레지스터만 존재했기 때문에 Segment:Offset 방식을 떠올림. 16-bit 레지스터는 64KiB (또는 2^16)이상의 메모리를 접근하는 것이 불가능하기 때문임. 그래서 이는 프로그램이 1MiB 의 메모리를 전부 접근할 수 있게 함.
 

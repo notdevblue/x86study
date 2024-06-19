@@ -1,4 +1,4 @@
-# [Addressing memory](https://en.wikibooks.org/wiki/X86_Assembly/16,_32,_and_64_Bits)
+# [Addressing memory](https://en.wikibooks.org/wiki/X86_Assembly/16,_32,_and_64_Bits#Addressing_memory)
 
 ## 8086 and 80186
 
